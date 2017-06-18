@@ -17,10 +17,9 @@ public class InboundRequestInfo {
 	private int remotePort;
 	private byte[] content;
 	private String contentString;
-	private String signature;
-	private String agreedRequestEncoding;
-	private String agreedResponseEncoding;
-	private String reqNodeId;
+	private String objectMark;
+	private String requestEncoding;
+	private String responseEncoding;
 	private String serviceId;
 	
 	private Date receiveTime;
@@ -67,32 +66,28 @@ public class InboundRequestInfo {
 		this.contentString = contentString;
 	}
 
-	public void setSignature(String signature) {
-		this.signature = signature;
+	public String getObjectMark() {
+		return objectMark;
 	}
 
-	public String getAgreedRequestEncoding() {
-		return agreedRequestEncoding;
+	public void setObjectMark(String objectMark) {
+		this.objectMark = objectMark;
 	}
 
-	public void setAgreedRequestEncoding(String agreedRequestEncoding) {
-		this.agreedRequestEncoding = agreedRequestEncoding;
+	public String getRequestEncoding() {
+		return requestEncoding;
 	}
 
-	public String getAgreedResponseEncoding() {
-		return agreedResponseEncoding;
+	public void setRequestEncoding(String requestEncoding) {
+		this.requestEncoding = requestEncoding;
 	}
 
-	public void setAgreedResponseEncoding(String agreedResponseEncoding) {
-		this.agreedResponseEncoding = agreedResponseEncoding;
+	public String getResponseEncoding() {
+		return responseEncoding;
 	}
 
-	public String getReqNodeId() {
-		return reqNodeId;
-	}
-
-	public void setReqNodeId(String reqNodeId) {
-		this.reqNodeId = reqNodeId;
+	public void setResponseEncoding(String responseEncoding) {
+		this.responseEncoding = responseEncoding;
 	}
 
 	public String getServiceId() {

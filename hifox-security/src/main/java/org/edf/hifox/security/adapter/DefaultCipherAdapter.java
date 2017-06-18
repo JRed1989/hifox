@@ -1,10 +1,12 @@
 package org.edf.hifox.security.adapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.edf.hifox.core.chain.Chain;
 import org.edf.hifox.core.chain.selector.ChainSelector;
-import org.edf.hifox.core.datatransfer.Body;
 import org.edf.hifox.core.exception.FailureException;
 import org.edf.hifox.core.util.SwapAreaUtil;
 import org.edf.hifox.security.constant.ErrorCodeConstant;
@@ -13,20 +15,23 @@ import org.edf.hifox.security.constant.SecurityConstant;
 public class DefaultCipherAdapter implements CipherAdapter {
 	private ChainSelector enChainSelector;
 	private ChainSelector deChainSelector;
+	
+	private List<String> noappendEnChainInfo = new ArrayList<String>();
 
 	@Override
-	public String encrypt(String input) {
+	public String encrypt(String type, String input) {
 		try {
 			// 适配加密
-			Body body = SwapAreaUtil.getInboundRequestMessage().getBody();
-			
-			Chain enChain = enChainSelector.select(body);
+			Chain enChain = enChainSelector.select(type);
 	
 			SwapAreaUtil.setObjectUniqueMark(enChain.objectUniqueMark());
 	
 			enChain.doChain(input);
 			
 			String result = SwapAreaUtil.getEncryptedText();
+			
+			if (noappendEnChainInfo.contains(type))
+				return result;
 			
 			// 追加加密链信息
 			String objectUniqueMark = enChain.objectUniqueMark();
@@ -69,6 +74,10 @@ public class DefaultCipherAdapter implements CipherAdapter {
 
 	public void setDeChainSelector(ChainSelector deChainSelector) {
 		this.deChainSelector = deChainSelector;
+	}
+
+	public void setNoappendEnChainInfo(List<String> noappendEnChainInfo) {
+		this.noappendEnChainInfo = noappendEnChainInfo;
 	}
 	
 }

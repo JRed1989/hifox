@@ -12,7 +12,7 @@
 		<module>hifox</module>
 		<module>hifox-core</module>
 		<module>hifox-security</module>
-		<module>hifox-test</module>
+		<module>hifox-demo</module>
 	</modules>
 
 	<properties>
@@ -35,9 +35,12 @@
 
 		<skip_maven_deploy>false</skip_maven_deploy>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<file_encoding>UTF-8</file_encoding>
 		<java_source_version>1.6</java_source_version>
 		<java_target_version>1.6</java_target_version>
-		<file_encoding>UTF-8</file_encoding>
+		
+		<env>dev</env>
 	</properties>
 
 	<dependencyManagement>
@@ -182,7 +185,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -205,6 +208,12 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.5</version>
+				<configuration>
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>keystore</nonFilteredFileExtension>
+						<nonFilteredFileExtension>cer</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
